@@ -116,8 +116,23 @@ public partial class _Default : System.Web.UI.Page
         Refresh();
     }
 
-    protected void Button1_Click(object sender, EventArgs e)
+    protected void AddButton_Click(object sender, EventArgs e)
     {
+        string id = TextBox1.Text;
+        string name = TextBox2.Text;
+        string sex = TextBox3.Text;
+        string age = TextBox4.Text;
+        string birth = TextBox5.Text;
+        string tel = TextBox6.Text;
 
+        string strsql = "INSERT INTO Roster(Id, Name, Sex, Age, Birth, Tel) VALUES(" + id + ", '" + name + "', '" + sex + "', '"+ age + "', '" + birth + "', '" + tel + "');";
+        CreateDataSet();
+        SqlConnection connection = new SqlConnection(RosterSource.ConnectionString);
+        SqlCommand command = new SqlCommand(strsql, connection);
+        connection.Open();
+        command.ExecuteNonQuery();
+        connection.Close();
+        Refresh();
+        TextBox1.Text = TextBox2.Text = TextBox3.Text = TextBox4.Text = TextBox5.Text = TextBox6.Text = "";
     }
 }
