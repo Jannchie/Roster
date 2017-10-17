@@ -23,7 +23,6 @@ public partial class _Default : System.Web.UI.Page
             RosterGridView.DataSource = RosterSource;
             RosterGridView.DataBind();
         }
-
     }
 
     protected void RosterGridView_SelectedIndexChanged(object sender, EventArgs e)
@@ -48,19 +47,16 @@ public partial class _Default : System.Web.UI.Page
             connection.Open();
         }
     }
-
     public void Execute(String sql)
     {
         OpenDatabase();
         command = new SqlCommand(sql, connection);
         command.ExecuteNonQuery();
         connection.Close();
-
     }
 
     protected void RosterGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-
         string ID = RosterGridView.Rows[e.RowIndex].Cells[0].Text.ToString();
         String sql = "DELETE FROM Roster WHERE Id = '" + ID + "'";
         Execute(sql);
@@ -79,7 +75,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void RosterGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
-        this.RosterGridView.EditIndex = e.RowIndex;
+        RosterGridView.EditIndex = e.RowIndex;
         string primaryKey = RosterGridView.DataKeys[e.RowIndex].Value.ToString();
         string name = ((TextBox)(RosterGridView.Rows[e.RowIndex].Cells[1].Controls[0])).Text.ToString().Trim();
         string sex = ((TextBox)(RosterGridView.Rows[e.RowIndex].Cells[2].Controls[0])).Text.ToString().Trim();
@@ -104,8 +100,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void RosterGridView_RowEditing(object sender, GridViewEditEventArgs e)
     {
-
-        RosterGridView.EditIndex = 0;
+        RosterGridView.EditIndex = e.NewEditIndex;
         Refresh();
     }
 

@@ -6,6 +6,15 @@
 <head runat="server">
     <style>
         /*  在此处填写叠层样式  */
+        header {
+            text-align: center;
+            color: white;
+            background-color: #3C8CD6;
+            height: 110px;
+            padding-top: 1px;
+            padding-bottom: 15px;
+        }
+
         body, html {
             height: 100%;
             width: 100%;
@@ -25,36 +34,38 @@
                 width: 100%;
                 border: 2px solid white;
             }
+
+        .add {
+            margin: 10px auto; /*  通过设置外边距（margin）中的左右外边距属性为auto使之居于父组件（body）中间*/
+            width: 60%;
+            background-color: aliceblue;
+        }
+
+        .addtable {
+            width: 100%;
+        }
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <style type="text/css">
         .auto-style1 {
-            height: 20px;
-        }
-
-        .auto-style2 {
-            width: 148px;
-        }
-
-        .auto-style7 {
-            width: 148px;
-            height: 25px;
-        }
-
-        .auto-style8 {
-            width: 258px;
-            height: 174px;
+            margin-bottom: 0px;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>花名册</h1>
+        <p>
+            <h3>Roster</h3>
+        </p>
+    </header>
     <form id="form1" runat="server">
         <div>
         </div>
-        <asp:SqlDataSource ID="RosterSource" 
-            runat="server" 
-            ConnectionString="<%$ ConnectionStrings:RosterConnectionString %>" 
+        <asp:SqlDataSource ID="RosterSource"
+            runat="server"
+            ConnectionString="<%$ ConnectionStrings:RosterConnectionString %>"
             SelectCommand="SELECT * FROM [Roster]"></asp:SqlDataSource>
         <asp:GridView ID="RosterGridView" runat="server"
             HorizontalAlign="Center"
@@ -62,7 +73,6 @@
             DataKeyNames="Id"
             OnSelectedIndexChanged="RosterGridView_SelectedIndexChanged"
             CellPadding="4"
-            Caption="学生花名册"
             CaptionAlign="Top"
             ForeColor="#333333"
             GridLines="None"
@@ -93,42 +103,45 @@
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
         <br />
-        <table class="auto-style8">
-            <tr>
-                <td>学号</td>
-                <td class="auto-style7">姓名</td>
-                <td class="auto-style7">性别</td>
-                <td class="auto-style7">年龄</td>
-                <td class="auto-style7">生日</td>
-                <td class="auto-style7">电话</td>
-            </tr>
-            <tr>
-                <td>
+        <div class="add">
 
-                    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <table class="addtable">
+                <tr>
+                    <td>学号</td>
+                    <td>姓名</td>
+                    <td>性别</td>
+                    <td>年龄</td>
+                    <td>生日</td>
+                    <td>电话</td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:TextBox ID="TextBox1" runat="server" Width="80%"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TextBox2" runat="server" Width="80%"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TextBox3" runat="server" Width="80%"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TextBox4" runat="server" CssClass="auto-style1" Width="80%"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TextBox5" runat="server" Width="80%"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TextBox6" runat="server" Width="80%"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style1" colspan="6">
+                        <asp:Button ID="AddButton" runat="server" OnClick="AddButton_Click" Text="添加" Height="27px" Width="97px" />
+                    </td>
+                </tr>
+            </table>
 
-                <td class="auto-style2">
-                    <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-                </td>
-                <td class="auto-style2">
-                    <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
-                </td>
-                <td class="auto-style2">
-                    <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
-                </td>
-                <td class="auto-style2">
-                    <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
-                </td>
-                <td class="auto-style2">
-                    <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="auto-style1" colspan="6">
-                    <asp:Button ID="AddButton" runat="server" OnClick="AddButton_Click" Text="添加" Height="27px" Width="97px" />
-                </td>
-            </tr>
-        </table>
+        </div>
         <br />
     </form>
 </body>
